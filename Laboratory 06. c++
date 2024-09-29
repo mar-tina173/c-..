@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+// Recursive binary search function
+int binarySearch(int arr[], int target, int low, int high) {
+    if (low <= high) {
+        int mid = low + (high - low) / 2;
+
+        // Check if the target is present at mid
+        if (arr[mid] == target)
+            return mid;
+
+        // If target is smaller than mid, search in the left half
+        if (arr[mid] > target)
+            return binarySearch(arr, target, low, mid - 1);
+
+        // If target is larger than mid, search in the right half
+        return binarySearch(arr, target, mid + 1, high);
+    }
+
+    // If the target is not present in the array
+    return -1;
+}
+
+int main() {
+    // Pre-defined sorted array
+    int arr[] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int target;
+    cout << "Enter the number you want to search for: ";
+    cin >> target;
+
+    // Perform binary search
+    int result = binarySearch(arr, target, 0, size - 1);
+
+    if (result != -1)
+        cout << "Element found at index: " << result << endl;
+    else
+        cout << "Element not found in the array." << endl;
+
+    return 0;
+}
